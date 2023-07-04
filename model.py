@@ -72,9 +72,9 @@ def BO_TPE_XGB(x_train, y_train, x_val, y_val, sample_weights,set_up):
 def BO_TPE_RF(x_train, y_train, x_val, y_val):
     def objective(space):
         model = RandomForestClassifier(
-                                       # max_depth=space['max_depth'],
+                                       max_depth=space['max_depth'],
                                        min_samples_leaf=space['min_samples_leaf'],
-                                       # min_samples_split=space['min_samples_split'],
+                                       min_samples_split=space['min_samples_split'],
                                        n_estimators=1000,
                                        class_weight='balanced'
                                        )
@@ -86,22 +86,22 @@ def BO_TPE_RF(x_train, y_train, x_val, y_val):
 
         return {'loss': loss, 'status': STATUS_OK}
 
-    # max_depths = [2, 4, 6, 8, 10, 15, 20]
-    # n_estimators = [10, 50, 75, 100, 300, 750]
+    max_depths = [2, 4, 6, 8, 10, 15, 20]
+    n_estimators = [10, 50, 75, 100, 300, 750]
     space = {
-             # 'max_depth': hp.choice('max_depth', max_depths),
+             'max_depth': hp.choice('max_depth', max_depths),
              'min_samples_leaf': hp.uniform('min_samples_leaf', 0, 1),
-             # 'min_samples_split': hp.uniform('min_samples_split', 0, 1),
-             # 'n_estimators': hp.choice('n_estimators', n_estimators)
+             'min_samples_split': hp.uniform('min_samples_split', 0, 1),
+             'n_estimators': hp.choice('n_estimators', n_estimators)
              }
 
     best = fmin(fn=objective, space=space, verbose=True, algo=tpe.suggest, max_evals=20)
 
     best_param = {
-                  # 'max_depth': max_depths[best['max_depth']],
+                  'max_depth': max_depths[best['max_depth']],
                   'min_samples_leaf': best['min_samples_leaf'],
-                  # 'min_samples_split': best['min_samples_split'],
-                  # 'n_estimators': n_estimators[best['n_estimators']]
+                  'min_samples_split': best['min_samples_split'],
+                  'n_estimators': n_estimators[best['n_estimators']]
     }
 
     return best_param
