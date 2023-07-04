@@ -8,8 +8,6 @@ import matplotlib.pyplot as plt
 from plot import shap_rewrite
 warnings.filterwarnings('ignore')
 import matplotlib.font_manager as fm
-# import seaborn as sns
-# sns.set_style("darkgrid", {"axes.facecolor": ".95"})
 
 
 set_up = 'multiclass'            # two-way
