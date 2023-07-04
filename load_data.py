@@ -130,10 +130,10 @@ for k, (train_index, val_index) in enumerate(skf.split(train_x, train_y)):
 
     # RandomForest
     print('RandomForest...')
-    # best_rf_parm = BO_TPE_RF(x_train_process, y_train, x_val_process, y_val)
-    # print(best_rf_parm)
+    best_rf_parm = BO_TPE_RF(x_train_process, y_train, x_val_process, y_val)
+    print(best_rf_parm)
     rf_model = RandomForestClassifier(
-                                   n_estimators=500,
+                                   n_estimators=best_rf_parm['n_estimators'],
                                    class_weight='balanced'
                                    )
     rf_model.fit(x_train_process, y_train)
