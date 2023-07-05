@@ -88,10 +88,3 @@ for set in (['internal', 'external']):
     print()
 
 all_result.to_excel('result/ci_95/' + set_up + '_feature_selection_table.xlsx')
-
-
-
-
-
-# aa = pd.DataFrame(data=np.concatenate((y_true.reshape(-1, 1), y_scores.reshape(-1, 1)), axis=1))
-# aa.to_csv('./result/ci_test.csv')
